@@ -4,8 +4,9 @@ import { io } from 'socket.io-client';
 import { AppBar, Toolbar, Typography, Container, Snackbar, Button, TextField, Grid } from '@mui/material';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import config from './config';
 
-const socket = io('http://localhost:8000', {
+const socket = io(config.baseURL, {
   transports: ['websocket', 'polling'],
 });
 
