@@ -114,12 +114,14 @@ export default function App() {
     if (distance <= 0.1) { // Within 100 meters
       setDeliveryState('ARRIVED');
       setStateMessage('We have reached your destination!');
-    } else if (distance <= 3) { // Within 1 km
-      setDeliveryState('NEAR TO');
-      setStateMessage(`We're ${(distance * 1000).toFixed(0)} m away from your destination.`);
-    } else if (deliveryState !== 'STARTED') {
+    } 
+    // else if (distance <= 1) { // Within 1 km
+    //   setDeliveryState('NEAR TO');
+    //   setStateMessage(`We're ${(distance * 1000).toFixed(0)} m away from your destination.`);
+    // } 
+    else if (deliveryState !== 'STARTED') {
       setDeliveryState('STARTED');
-      setStateMessage("We're delivering...");
+      setStateMessage(`We're delivering...${(distance * 1000).toFixed(0)} m away from your destination.`);
     }
   };
 
@@ -147,8 +149,10 @@ export default function App() {
     const newPath = generatePath(start.lat, start.lng, end.lat, end.lng, 100);
     setPath(newPath);
 
+    const distance = calculateDistance(start.lat, start.lng, end.lat, end.lng);
+
     setDeliveryState('STARTED');
-    setStateMessage("We're delivering...");
+    setStateMessage(`We're delivering...${(distance * 1000).toFixed(0)} m away from your destination.`);
 
     let i = 0;
     const interval = setInterval(() => {
