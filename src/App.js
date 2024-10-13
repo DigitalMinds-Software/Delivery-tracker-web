@@ -132,9 +132,15 @@ export default function App() {
     const start = await geocodeAddress(startAddress);
     const end = await geocodeAddress(endAddress);
 
-    if (!start || !end || !departureTime) {
+    if (!start || !end) {
       setIsSimulating(false);
-      setError('Please provide valid addresses and departure time.');
+      setError('Please provide valid addresses.');
+      return;
+    }
+
+    if (!departureTime) {
+      setIsSimulating(false);
+      setError('Please provide departure time.');
       return;
     }
 
@@ -197,7 +203,7 @@ export default function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Container style={{ marginTop: '20px' }}>
+      <Container style={{ marginTop: '20px', marginBottom: '50px' }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
